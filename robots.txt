@@ -1,0 +1,15 @@
+# robots.txt for on91.asia
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /games/
+Allow: /images/
+
+# 禁止访问部署脚本和其他敏感文件
+Disallow: /deploy.sh
+Disallow: /.htaccess
+Disallow: /.git/
+
+# 网站地图位置
+Sitemap: https://on91.asia/sitemap.xml 

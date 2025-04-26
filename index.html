@@ -1,105 +1,150 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>91xiuluo.cn - Free HTML5 Games</title>
-    <meta name="description" content="Play free HTML5 games online. Browse our collection of action, adventure, puzzle, strategy, racing, and sports games.">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>GameHub - 游戏中心</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .subtitle {
+            margin-top: 5px;
+            font-size: 1.2em;
+            opacity: 0.8;
+        }
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .game-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .game-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+        .car-racing {
+            background-image: url('images/car-racing.jpg');
+        }
+        .super-runner {
+            background-image: url('images/super-runner.jpg');
+        }
+        .sudoku-master {
+            background-image: url('images/sudoku-master.jpg');
+        }
+        .game-info {
+            padding: 15px;
+        }
+        .game-title {
+            margin: 0 0 10px 0;
+            font-size: 1.5em;
+        }
+        .game-description {
+            margin: 0 0 15px 0;
+            color: #666;
+            font-size: 0.9em;
+        }
+        .play-button {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .play-button:hover {
+            background-color: #2980b9;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+        @media (max-width: 768px) {
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar">
+    <header>
         <div class="container">
-            <a href="/" class="navbar-brand">91xiuluo.cn</a>
-            <ul class="navbar-menu">
-                <li><a href="/">Home</a></li>
-                <li><a href="/games/action">Action</a></li>
-                <li><a href="/games/adventure">Adventure</a></li>
-                <li><a href="/games/puzzle">Puzzle</a></li>
-                <li><a href="/games/strategy">Strategy</a></li>
-                <li><a href="/games/racing">Racing</a></li>
-                <li><a href="/games/sports">Sports</a></li>
-            </ul>
+            <h1>GameHub</h1>
+            <p class="subtitle">精选HTML5游戏合集</p>
         </div>
-    </nav>
+    </header>
 
     <div class="container">
-        <header class="text-center mb-4">
-            <h1>Welcome to 91xiuluo.cn</h1>
-            <p class="lead">Play the best free HTML5 games online!</p>
-        </header>
-
-        <div class="categories-grid">
-            <a href="/games/action" class="category-card">
-                <i class="fas fa-gamepad"></i>
-                <h3>Action Games</h3>
-                <p>Exciting shooting and fighting games</p>
-            </a>
-            <a href="/games/adventure" class="category-card">
-                <i class="fas fa-map"></i>
-                <h3>Adventure Games</h3>
-                <p>Explore mysterious worlds</p>
-            </a>
-            <a href="/games/puzzle" class="category-card">
-                <i class="fas fa-puzzle-piece"></i>
-                <h3>Puzzle Games</h3>
-                <p>Challenge your mind</p>
-            </a>
-            <a href="/games/strategy" class="category-card">
-                <i class="fas fa-chess"></i>
-                <h3>Strategy Games</h3>
-                <p>Test your tactical skills</p>
-            </a>
-            <a href="/games/racing" class="category-card">
-                <i class="fas fa-car"></i>
-                <h3>Racing Games</h3>
-                <p>Speed and competition</p>
-            </a>
-            <a href="/games/sports" class="category-card">
-                <i class="fas fa-futbol"></i>
-                <h3>Sports Games</h3>
-                <p>Virtual sports action</p>
-            </a>
-        </div>
-
-        <section class="featured-games mt-4">
-            <h2 class="text-center mb-4">Featured Games</h2>
-            <div class="games-grid">
-                <div class="game-card">
-                    <img src="images/games/crazy-shooters.jpg" alt="Crazy Shooters">
-                    <div class="game-card-content">
-                        <h3 class="game-title">Crazy Shooters</h3>
-                        <p class="game-category">Action</p>
-                        <p>An intense shooting game where you battle waves of enemies.</p>
-                        <a href="/games/action/crazy-shooters.html" class="btn">Play Now</a>
-                    </div>
-                </div>
-                <div class="game-card">
-                    <img src="images/games/fall-boys.jpg" alt="Fall Boys">
-                    <div class="game-card-content">
-                        <h3 class="game-title">Fall Boys</h3>
-                        <p class="game-category">Adventure</p>
-                        <p>A fun platformer where you race against other players.</p>
-                        <a href="/games/adventure/fall-boys.html" class="btn">Play Now</a>
-                    </div>
-                </div>
-                <div class="game-card">
-                    <img src="images/games/tetris.jpg" alt="Tetris">
-                    <div class="game-card-content">
-                        <h3 class="game-title">Tetris</h3>
-                        <p class="game-category">Puzzle</p>
-                        <p>The classic block-stacking puzzle game.</p>
-                        <a href="/games/puzzle/tetris.html" class="btn">Play Now</a>
-                    </div>
+        <div class="games-grid">
+            <div class="game-card">
+                <div class="game-image car-racing"></div>
+                <div class="game-info">
+                    <h2 class="game-title">赛车竞速</h2>
+                    <p class="game-description">使用方向键控制赛车，躲避其他车辆，收集金币！挑战你的反应速度和驾驶技巧。</p>
+                    <a href="games/car-racing/index.html" class="play-button">开始游戏</a>
                 </div>
             </div>
-        </section>
+            
+            <div class="game-card">
+                <div class="game-image super-runner"></div>
+                <div class="game-info">
+                    <h2 class="game-title">超级跑酷</h2>
+                    <p class="game-description">点击屏幕跳跃，躲避障碍物，收集金币！考验你的反应能力和跳跃技巧。</p>
+                    <a href="games/super-runner/index.html" class="play-button">开始游戏</a>
+                </div>
+            </div>
+            
+            <div class="game-card">
+                <div class="game-image sudoku-master"></div>
+                <div class="game-info">
+                    <h2 class="game-title">数独大师</h2>
+                    <p class="game-description">挑战你的逻辑思维能力，完成数独谜题！提供多个难度级别，适合所有玩家。</p>
+                    <a href="games/sudoku-master/index.html" class="play-button">开始游戏</a>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <footer class="text-center py-4">
-        <p>&copy; 2025 91xiuluo.cn - All rights reserved</p>
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 GameHub - 所有游戏均可在 on91.asia 上免费游玩</p>
+        </div>
     </footer>
 </body>
 </html> 

@@ -3,131 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>91xiuluo.cn - Free Online Games</title>
-    <meta name="description" content="Play free online games at 91xiuluo.cn. Browse our collection of action, adventure, puzzle, strategy, and more games.">
-    <link rel="canonical" href="https://91xiuluo.cn" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-    </style>
+    <title>91xiuluo.cn - Free HTML5 Games</title>
+    <meta name="description" content="Play free HTML5 games online. Browse our collection of action, adventure, puzzle, strategy, racing, and sports games.">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-gray-50">
-    <!-- Global Navigation -->
-    <nav class="bg-gray-900 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
-                    <a href="/" class="text-xl font-bold">91xiuluo.cn</a>
-                </div>
-                <div class="hidden md:block">
-                    <div class="flex items-center space-x-4">
-                        <a href="/" class="text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                        <a href="/games/popular" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Popular</a>
-                        <a href="/games/new" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">New Games</a>
-                        <a href="/games/top-rated" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Top Rated</a>
-                        <a href="/games/categories" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Categories</a>
-                    </div>
-                </div>
-                <div class="flex-1 max-w-lg mx-4">
-                    <div class="relative">
-                        <input type="text" 
-                               class="w-full bg-gray-800 text-white rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               placeholder="Search games...">
-                        <div class="absolute left-3 top-2.5">
-                            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="navbar-brand">91xiuluo.cn</a>
+            <ul class="navbar-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/games/action">Action</a></li>
+                <li><a href="/games/adventure">Adventure</a></li>
+                <li><a href="/games/puzzle">Puzzle</a></li>
+                <li><a href="/games/strategy">Strategy</a></li>
+                <li><a href="/games/racing">Racing</a></li>
+                <li><a href="/games/sports">Sports</a></li>
+            </ul>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Featured Game -->
-        <section class="mb-12">
-            <h2 class="text-2xl font-bold text-gray-900 mb-6">Featured Game</h2>
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div class="aspect-w-16 aspect-h-9">
-                    <iframe 
-                        src="https://cloud.onlinegames.io/games/2025/unity/monster-survivors/index-og.html"
-                        class="w-full h-full border-0"
-                        allow="fullscreen"
-                        loading="lazy"
-                        title="Monster Survivors Game">
-                    </iframe>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Monster Survivors</h3>
-                    <p class="text-gray-600 mb-4">An epic survival action game where you battle waves of monsters and evolve your character</p>
-                    <a href="/games/action/monster-survivors.html" class="text-blue-600 hover:text-blue-800 font-medium">Play Now →</a>
-                </div>
-            </div>
-        </section>
+    <div class="container">
+        <header class="text-center mb-4">
+            <h1>Welcome to 91xiuluo.cn</h1>
+            <p class="lead">Play the best free HTML5 games online!</p>
+        </header>
 
-        <!-- Game Categories -->
-        <section>
-            <h2 class="text-2xl font-bold text-gray-900 mb-6">Game Categories</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Action Games -->
-                <a href="/games/action" class="block bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                    <div class="p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Action Games</h3>
-                        <p class="text-gray-600">Exciting games with fast-paced gameplay and intense combat</p>
-                    </div>
-                </a>
-
-                <!-- Adventure Games -->
-                <a href="/games/adventure" class="block bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                    <div class="p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Adventure Games</h3>
-                        <p class="text-gray-600">Explore mysterious worlds and embark on epic quests</p>
-                    </div>
-                </a>
-
-                <!-- Puzzle Games -->
-                <a href="/games/puzzle" class="block bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                    <div class="p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Puzzle Games</h3>
-                        <p class="text-gray-600">Challenge your mind with brain-teasing puzzles</p>
-                    </div>
-                </a>
-
-                <!-- Strategy Games -->
-                <a href="/games/strategy" class="block bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                    <div class="p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Strategy Games</h3>
-                        <p class="text-gray-600">Plan your moves and outsmart your opponents</p>
-                    </div>
-                </a>
-
-                <!-- RPG Games -->
-                <a href="/games/rpg" class="block bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                    <div class="p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">RPG Games</h3>
-                        <p class="text-gray-600">Role-playing games with character development and storylines</p>
-                    </div>
-                </a>
-
-                <!-- Sports Games -->
-                <a href="/games/sports" class="block bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                    <div class="p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Sports Games</h3>
-                        <p class="text-gray-600">Compete in various sports and athletic challenges</p>
-                    </div>
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <footer class="bg-gray-900 text-white mt-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <p class="text-center text-gray-400">© 2024 91xiuluo.cn - All rights reserved</p>
+        <div class="categories-grid">
+            <a href="/games/action" class="category-card">
+                <i class="fas fa-gamepad"></i>
+                <h3>Action Games</h3>
+                <p>Exciting shooting and fighting games</p>
+            </a>
+            <a href="/games/adventure" class="category-card">
+                <i class="fas fa-map"></i>
+                <h3>Adventure Games</h3>
+                <p>Explore mysterious worlds</p>
+            </a>
+            <a href="/games/puzzle" class="category-card">
+                <i class="fas fa-puzzle-piece"></i>
+                <h3>Puzzle Games</h3>
+                <p>Challenge your mind</p>
+            </a>
+            <a href="/games/strategy" class="category-card">
+                <i class="fas fa-chess"></i>
+                <h3>Strategy Games</h3>
+                <p>Test your tactical skills</p>
+            </a>
+            <a href="/games/racing" class="category-card">
+                <i class="fas fa-car"></i>
+                <h3>Racing Games</h3>
+                <p>Speed and competition</p>
+            </a>
+            <a href="/games/sports" class="category-card">
+                <i class="fas fa-futbol"></i>
+                <h3>Sports Games</h3>
+                <p>Virtual sports action</p>
+            </a>
         </div>
+
+        <section class="featured-games mt-4">
+            <h2 class="text-center mb-4">Featured Games</h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="images/games/crazy-shooters.jpg" alt="Crazy Shooters">
+                    <div class="game-card-content">
+                        <h3 class="game-title">Crazy Shooters</h3>
+                        <p class="game-category">Action</p>
+                        <p>An intense shooting game where you battle waves of enemies.</p>
+                        <a href="/games/action/crazy-shooters.html" class="btn">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="images/games/fall-boys.jpg" alt="Fall Boys">
+                    <div class="game-card-content">
+                        <h3 class="game-title">Fall Boys</h3>
+                        <p class="game-category">Adventure</p>
+                        <p>A fun platformer where you race against other players.</p>
+                        <a href="/games/adventure/fall-boys.html" class="btn">Play Now</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="images/games/tetris.jpg" alt="Tetris">
+                    <div class="game-card-content">
+                        <h3 class="game-title">Tetris</h3>
+                        <p class="game-category">Puzzle</p>
+                        <p>The classic block-stacking puzzle game.</p>
+                        <a href="/games/puzzle/tetris.html" class="btn">Play Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="text-center py-4">
+        <p>&copy; 2025 91xiuluo.cn - All rights reserved</p>
     </footer>
 </body>
 </html> 

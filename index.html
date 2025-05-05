@@ -3,7 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameHub - 游戏中心</title>
+    <title>HTML5游戏中心</title>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6S9QYFGJZZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-6S9QYFGJZZ');
+    </script>
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             margin: 0;
@@ -103,48 +112,76 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>GameHub</h1>
-            <p class="subtitle">精选HTML5游戏合集</p>
+    <!-- 导航菜单 -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">游戏中心</div>
+            <div class="search-box">
+                <input type="text" placeholder="搜索游戏...">
+                <button>搜索</button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">首页</a></li>
+                <li><a href="#">动作游戏</a></li>
+                <li><a href="#">益智游戏</a></li>
+                <li><a href="#">策略游戏</a></li>
+                <li><a href="#">体育游戏</a></li>
+            </ul>
         </div>
-    </header>
+    </nav>
 
-    <div class="container">
-        <div class="games-grid">
-            <div class="game-card">
-                <div class="game-image car-racing"></div>
-                <div class="game-info">
-                    <h2 class="game-title">赛车竞速</h2>
-                    <p class="game-description">使用方向键控制赛车，躲避其他车辆，收集金币！挑战你的反应速度和驾驶技巧。</p>
-                    <a href="games/car-racing/index.html" class="play-button">开始游戏</a>
-                </div>
+    <!-- 游戏分类 -->
+    <div class="game-categories">
+        <h2>游戏分类</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <h3>动作游戏</h3>
+                <p>刺激的动作冒险游戏</p>
             </div>
-            
-            <div class="game-card">
-                <div class="game-image super-runner"></div>
-                <div class="game-info">
-                    <h2 class="game-title">超级跑酷</h2>
-                    <p class="game-description">点击屏幕跳跃，躲避障碍物，收集金币！考验你的反应能力和跳跃技巧。</p>
-                    <a href="games/super-runner/index.html" class="play-button">开始游戏</a>
-                </div>
+            <div class="category-card">
+                <h3>益智游戏</h3>
+                <p>锻炼脑力的解谜游戏</p>
             </div>
-            
+            <div class="category-card">
+                <h3>策略游戏</h3>
+                <p>考验策略的战术游戏</p>
+            </div>
+            <div class="category-card">
+                <h3>体育游戏</h3>
+                <p>模拟真实体育赛事</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 游戏展示区 -->
+    <div class="game-container">
+        <h2>热门游戏</h2>
+        <div class="game-grid">
             <div class="game-card">
-                <div class="game-image sudoku-master"></div>
-                <div class="game-info">
-                    <h2 class="game-title">数独大师</h2>
-                    <p class="game-description">挑战你的逻辑思维能力，完成数独谜题！提供多个难度级别，适合所有玩家。</p>
-                    <a href="games/sudoku-master/index.html" class="play-button">开始游戏</a>
-                </div>
+                <img src="games/car-racing/screenshot.png" alt="赛车竞速游戏截图">
+                <h3>赛车竞速</h3>
+                <p>使用方向键控制赛车，躲避其他车辆，收集金币！挑战你的反应速度和驾驶技巧。</p>
+                <a href="game-detail.html?id=1" class="play-button">开始游戏</a>
+            </div>
+            <div class="game-card">
+                <img src="games/super-runner/screenshot.png" alt="超级跑酷游戏截图">
+                <h3>超级跑酷</h3>
+                <p>点击屏幕跳跃，躲避障碍物，收集金币！考验你的反应能力和跳跃技巧。</p>
+                <a href="game-detail.html?id=2" class="play-button">开始游戏</a>
+            </div>
+            <div class="game-card">
+                <img src="games/sudoku-master/screenshot.png" alt="数独大师游戏截图">
+                <h3>数独大师</h3>
+                <p>挑战你的逻辑思维能力，完成数独谜题！提供多个难度级别，适合所有玩家。</p>
+                <a href="game-detail.html?id=3" class="play-button">开始游戏</a>
             </div>
         </div>
     </div>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2023 GameHub - 所有游戏均可在 on91.asia 上免费游玩</p>
-        </div>
+        <p>© 2024 HTML5游戏中心. 保留所有权利。</p>
     </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html> 

@@ -1,81 +1,609 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Monster Survivors - 一款刺激的生存冒险游戏，在无尽的怪物浪潮中生存下来！">
-    <meta name="keywords" content="Monster Survivors, 生存游戏, 在线游戏, 冒险游戏, 怪物游戏">
-    <title>Monster Survivors - 刺激的生存冒险游戏 | on91.iasa</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="canonical" href="https://on91.iasa/monster-survivors" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>赛博朋克游戏站 - 首页原型</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', '微软雅黑', Arial, sans-serif;
+      background: linear-gradient(135deg, #0a0b13 0%, #181a24 100%);
+      color: #e0e0e0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+    /* 星空canvas背景 */
+    #star-bg {
+      position: fixed;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      display: block;
+    }
+    /* 扫描线特效 */
+    body::before {
+      content: '';
+      position: fixed;
+      left: 0; top: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.01) 0px,
+        rgba(255,255,255,0.01) 1px,
+        transparent 2px,
+        transparent 8px
+      );
+      z-index: 1;
+    }
+    /* 顶部导航 */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px 12px 48px;
+      background: rgba(10,12,24,0.95);
+      box-shadow: 0 2px 12px 0 #0ff2 0.2;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo {
+      font-size: 2.2rem;
+      color: #1de9b6;
+      letter-spacing: 2px;
+      text-shadow: 0 0 4px #1de9b6, 0 0 8px #1de9b6a0;
+      font-weight: bold;
+      user-select: none;
+    }
+    .search-box {
+      flex: 1;
+      margin: 0 32px;
+      position: relative;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 10px 40px 10px 16px;
+      border-radius: 24px;
+      border: none;
+      background: #181a24;
+      color: #e0e0e0;
+      font-size: 1rem;
+      outline: none;
+      box-shadow: 0 0 4px #1de9b6a0;
+      transition: box-shadow 0.3s;
+    }
+    .search-box input:focus {
+      box-shadow: 0 0 8px #1de9b6a0;
+    }
+    .search-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #1de9b6;
+      font-size: 1.2rem;
+      pointer-events: none;
+      text-shadow: 0 0 4px #1de9b6a0;
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+    }
+    .nav-link {
+      color: #e0e0e0;
+      text-decoration: none;
+      font-size: 1.1rem;
+      padding: 8px 18px;
+      border-radius: 18px;
+      background: rgba(30,40,60,0.7);
+      box-shadow: 0 0 4px #1de9b6a0;
+      transition: filter 0.2s, box-shadow 0.2s, background 0.2s;
+      filter: blur(0.2px) contrast(1.1) saturate(1.2);
+    }
+    .nav-link:hover {
+      filter: blur(0) contrast(1.3) saturate(1.5);
+      box-shadow: 0 0 12px #1de9b6, 0 0 16px #536dfe80;
+      background: rgba(30,40,60,0.95);
+    }
+    .user-btn {
+      color: #e0e0e0;
+      background: linear-gradient(90deg, #536dfe 10%, #1de9b6 90%);
+      border: none;
+      border-radius: 18px;
+      padding: 8px 22px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      box-shadow: 0 0 6px #1de9b6a0, 0 0 8px #536dfe60;
+      cursor: pointer;
+      transition: filter 0.2s, box-shadow 0.2s;
+      filter: blur(0.2px) contrast(1.1) saturate(1.2);
+    }
+    .user-btn:hover {
+      filter: blur(0) contrast(1.3) saturate(1.5);
+      box-shadow: 0 0 16px #1de9b6, 0 0 20px #536dfe;
+    }
+    /* Banner区 */
+    .banner {
+      margin: 32px auto 0 auto;
+      max-width: 1200px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 0 16px #1de9b6a0, 0 0 24px #536dfe40;
+      position: relative;
+      background: linear-gradient(120deg, #181a24 60%, #1de9b620 100%);
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .banner-content {
+      color: #e0e0e0;
+      text-align: center;
+      z-index: 2;
+      position: relative;
+    }
+    .banner-title {
+      font-size: 2.5rem;
+      color: #1de9b6;
+      text-shadow: 0 0 8px #1de9b6, 0 0 16px #536dfe80;
+      margin-bottom: 12px;
+    }
+    .banner-desc {
+      font-size: 1.2rem;
+      color: #e0e0e0;
+      text-shadow: 0 0 4px #1de9b6a0;
+      margin-bottom: 24px;
+    }
+    .banner-btn {
+      background: linear-gradient(90deg, #536dfe 10%, #1de9b6 90%);
+      color: #fff;
+      border: none;
+      border-radius: 18px;
+      padding: 12px 32px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      box-shadow: 0 0 8px #1de9b6a0, 0 0 12px #536dfe40;
+      cursor: pointer;
+      transition: filter 0.2s, box-shadow 0.2s;
+      filter: blur(0.2px) contrast(1.1) saturate(1.2);
+    }
+    .banner-btn:hover {
+      filter: blur(0) contrast(1.3) saturate(1.5);
+      box-shadow: 0 0 20px #1de9b6, 0 0 24px #536dfe;
+    }
+    /* 失真特效 */
+    .glitch {
+      position: relative;
+      color: #1de9b6;
+      font-size: 2.5rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-shadow:
+        2px 0 #536dfe,
+        -2px 0 #1de9b6,
+        0 2px #fff,
+        0 -2px #1de9b6a0;
+      animation: glitch 1.2s infinite linear alternate-reverse;
+    }
+    @keyframes glitch {
+      0% { filter: hue-rotate(0deg) blur(0.2px); }
+      20% { filter: hue-rotate(10deg) blur(0.4px); }
+      40% { filter: hue-rotate(-10deg) blur(0.2px); }
+      60% { filter: hue-rotate(20deg) blur(0.6px); }
+      80% { filter: hue-rotate(-20deg) blur(0.2px); }
+      100% { filter: hue-rotate(0deg) blur(0.2px); }
+    }
+    /* 内容区 */
+    .section {
+      max-width: 1200px;
+      margin: 48px auto 0 auto;
+      padding: 0 24px;
+    }
+    .section-title {
+      font-size: 1.6rem;
+      color: #1de9b6;
+      text-shadow: 0 0 4px #1de9b6a0;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+    }
+    /* 游戏卡片 */
+    .game-list {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .game-card {
+      background: linear-gradient(120deg, #181a24 60%, #1de9b610 100%);
+      border-radius: 18px;
+      box-shadow: 0 0 8px #1de9b6a0, 0 0 12px #536dfe40;
+      width: 220px;
+      padding: 18px 12px 12px 12px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+      filter: blur(0.2px) contrast(1.1) saturate(1.2);
+      cursor: pointer;
+    }
+    .game-card:hover {
+      transform: translateY(-8px) scale(1.04) rotate(-1deg);
+      box-shadow: 0 0 20px #1de9b6, 0 0 24px #536dfe;
+      filter: blur(0) contrast(1.3) saturate(1.5);
+    }
+    .game-thumb {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      box-shadow: 0 0 4px #1de9b6a0;
+    }
+    .game-title {
+      font-size: 1.1rem;
+      color: #e0e0e0;
+      text-shadow: 0 0 3px #1de9b6a0;
+      margin-bottom: 6px;
+    }
+    .game-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .game-tag {
+      background: linear-gradient(90deg, #1de9b6 10%, #536dfe 90%);
+      color: #fff;
+      border-radius: 10px;
+      padding: 2px 10px;
+      font-size: 0.85rem;
+      box-shadow: 0 0 4px #1de9b6a0;
+      margin-bottom: 2px;
+    }
+    .game-btn {
+      background: linear-gradient(90deg, #536dfe 10%, #1de9b6 90%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 6px 18px;
+      font-size: 1rem;
+      font-weight: bold;
+      box-shadow: 0 0 6px #1de9b6a0, 0 0 8px #536dfe40;
+      cursor: pointer;
+      transition: filter 0.2s, box-shadow 0.2s;
+      filter: blur(0.2px) contrast(1.1) saturate(1.2);
+    }
+    .game-btn:hover {
+      filter: blur(0) contrast(1.3) saturate(1.5);
+      box-shadow: 0 0 16px #1de9b6, 0 0 20px #536dfe;
+    }
+    /* 分类导航区 */
+    .category-nav {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      justify-content: center;
+    }
+    .category-item {
+      background: linear-gradient(90deg, #1de9b6 10%, #536dfe 90%);
+      color: #fff;
+      border-radius: 16px;
+      padding: 12px 32px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      box-shadow: 0 0 6px #1de9b6a0, 0 0 8px #536dfe40;
+      cursor: pointer;
+      margin-bottom: 8px;
+      transition: filter 0.2s, box-shadow 0.2s;
+      filter: blur(0.2px) contrast(1.1) saturate(1.2);
+    }
+    .category-item:hover {
+      filter: blur(0) contrast(1.3) saturate(1.5);
+      box-shadow: 0 0 16px #1de9b6, 0 0 20px #536dfe;
+    }
+    /* 页脚 */
+    footer {
+      margin-top: 48px;
+      padding: 32px 0 16px 0;
+      background: rgba(10,12,24,0.95);
+      color: #888;
+      text-align: center;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      border-top: 1px solid #1de9b620;
+      box-shadow: 0 -2px 8px #1de9b620;
+    }
+    @media (max-width: 900px) {
+      .navbar, .section {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+      .banner {
+        min-height: 180px;
+      }
+      .game-list {
+        flex-direction: column;
+        align-items: center;
+      }
+      .category-nav {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-white">
-    <header class="bg-gray-800 py-6">
-        <div class="container mx-auto px-4">
-            <h1 class="text-4xl font-bold text-center text-yellow-400 mb-2">Monster Survivors</h1>
-            <p class="text-xl text-center text-gray-300">在无尽的怪物浪潮中生存下来，成为最后的幸存者！</p>
-        </div>
-    </header>
+<body>
+  <canvas id="star-bg"></canvas>
+  <nav class="navbar">
+    <div class="logo">CYBER<span style="color:#536dfe">GAMES</span></div>
+    <div class="search-box">
+      <input type="text" placeholder="搜索游戏/分类/标签...">
+      <span class="search-icon">🔍</span>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="nav-link">分类</a>
+      <a href="#" class="nav-link">专题</a>
+      <a href="#" class="nav-link">最新</a>
+    </div>
+    <button class="user-btn">登录/注册</button>
+  </nav>
 
-    <main class="container mx-auto px-4 py-8">
-        <div class="max-w-4xl mx-auto">
-            <!-- 游戏 iframe -->
-            <div class="aspect-w-16 aspect-h-9 mb-8">
-                <iframe 
-                    src="https://cloud.onlinegames.io/games/2025/unity/monster-survivors/index-og.html"
-                    class="w-full h-[600px] rounded-lg shadow-lg"
-                    allowfullscreen>
-                </iframe>
-            </div>
+  <section class="banner">
+    <div class="banner-content">
+      <div class="banner-title glitch">专题活动：<span style="color:#536dfe">赛博狂潮</span></div>
+      <div class="banner-desc">体验最炫酷的赛博朋克风小游戏，参与活动赢取专属徽章！</div>
+      <button class="banner-btn">立即参与</button>
+    </div>
+  </section>
 
-            <!-- 游戏介绍 -->
-            <section class="bg-gray-800 rounded-lg p-6 mb-8">
-                <h2 class="text-2xl font-bold text-yellow-400 mb-4">游戏介绍</h2>
-                <div class="space-y-4 text-gray-300">
-                    <p>Monster Survivors 是一款充满挑战性的生存冒险游戏。在这个充满危险的世界中，你将面对源源不断的怪物袭击。通过收集资源、升级技能和装备，努力在这个充满敌意的环境中生存下来。</p>
-                    
-                    <h3 class="text-xl font-semibold text-yellow-400 mt-6 mb-3">游戏特点：</h3>
-                    <ul class="list-disc list-inside space-y-2">
-                        <li>刺激的实时战斗系统</li>
-                        <li>丰富的角色升级系统</li>
-                        <li>多样化的怪物类型</li>
-                        <li>独特的技能组合</li>
-                        <li>精美的游戏画面</li>
-                    </ul>
-                </div>
-            </section>
+  <section class="section">
+    <div class="section-title">🔥 热门推荐</div>
+    <div class="game-list">
+      <div class="game-card">
+        <img class="game-thumb" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="game1">
+        <div class="game-title">霓虹疾驰</div>
+        <div class="game-tags"><span class="game-tag">竞速</span><span class="game-tag">赛博朋克</span></div>
+        <button class="game-btn">开始游戏</button>
+      </div>
+      <div class="game-card">
+        <img class="game-thumb" src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="game2">
+        <div class="game-title">未来迷城</div>
+        <div class="game-tags"><span class="game-tag">冒险</span><span class="game-tag">解谜</span></div>
+        <button class="game-btn">开始游戏</button>
+      </div>
+      <div class="game-card">
+        <img class="game-thumb" src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="game3">
+        <div class="game-title">光影猎手</div>
+        <div class="game-tags"><span class="game-tag">动作</span><span class="game-tag">射击</span></div>
+        <button class="game-btn">开始游戏</button>
+      </div>
+    </div>
+  </section>
 
-            <!-- 游戏操作说明 -->
-            <section class="bg-gray-800 rounded-lg p-6">
-                <h2 class="text-2xl font-bold text-yellow-400 mb-4">操作说明</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300">
-                    <div>
-                        <h3 class="text-xl font-semibold text-yellow-400 mb-2">基本操作</h3>
-                        <ul class="space-y-2">
-                            <li>WASD - 移动角色</li>
-                            <li>鼠标点击 - 攻击</li>
-                            <li>空格键 - 特殊技能</li>
-                            <li>ESC - 暂停游戏</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-yellow-400 mb-2">游戏提示</h3>
-                        <ul class="space-y-2">
-                            <li>注意收集经验值升级</li>
-                            <li>合理使用技能冷却时间</li>
-                            <li>保持移动避免被包围</li>
-                            <li>优先升级核心技能</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
+  <section class="section">
+    <div class="section-title">🆕 最新上线</div>
+    <div class="game-list">
+      <div class="game-card">
+        <img class="game-thumb" src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80" alt="game4">
+        <div class="game-title">数据迷踪</div>
+        <div class="game-tags"><span class="game-tag">益智</span><span class="game-tag">解谜</span></div>
+        <button class="game-btn">开始游戏</button>
+      </div>
+      <div class="game-card">
+        <img class="game-thumb" src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="game5">
+        <div class="game-title">虚拟边界</div>
+        <div class="game-tags"><span class="game-tag">模拟</span><span class="game-tag">沙盒</span></div>
+        <button class="game-btn">开始游戏</button>
+      </div>
+      <div class="game-card">
+        <img class="game-thumb" src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="game6">
+        <div class="game-title">电音节拍</div>
+        <div class="game-tags"><span class="game-tag">音乐</span><span class="game-tag">节奏</span></div>
+        <button class="game-btn">开始游戏</button>
+      </div>
+    </div>
+  </section>
 
-    <footer class="bg-gray-800 py-6 mt-8">
-        <div class="container mx-auto px-4 text-center text-gray-400">
-            <p>&copy; 2024 on91.iasa - Monster Survivors. 保留所有权利。</p>
-        </div>
-    </footer>
+  <section class="section">
+    <div class="section-title">🗂 分类导航</div>
+    <div class="category-nav">
+      <div class="category-item">动作</div>
+      <div class="category-item">益智</div>
+      <div class="category-item">休闲</div>
+      <div class="category-item">冒险</div>
+      <div class="category-item">策略</div>
+      <div class="category-item">体育</div>
+      <div class="category-item">竞速</div>
+      <div class="category-item">角色扮演</div>
+      <div class="category-item">模拟</div>
+      <div class="category-item">其他</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">🌟 专题活动</div>
+    <div class="game-list">
+      <div class="game-card">
+        <img class="game-thumb" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="topic1">
+        <div class="game-title">夏日霓虹节</div>
+        <div class="game-tags"><span class="game-tag">专题</span><span class="game-tag">限时活动</span></div>
+        <button class="game-btn">查看详情</button>
+      </div>
+      <div class="game-card">
+        <img class="game-thumb" src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80" alt="topic2">
+        <div class="game-title">未来科技周</div>
+        <div class="game-tags"><span class="game-tag">专题</span><span class="game-tag">科技</span></div>
+        <button class="game-btn">查看详情</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2024 CYBERGAMES. 赛博朋克小游戏站 | 联系方式：hi@cybergames.com
+  </footer>
+
+  <script>
+    // 星空背景动画
+    const canvas = document.getElementById('star-bg');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const STAR_NUM = 500; // 星星数量增加
+    const STAR_COLOR = 'rgba(255,255,255,0.88)';
+    const STAR_MIN_SIZE = 0.5;
+    const STAR_MAX_SIZE = 2.2;
+    const STAR_SPEED = 0.18;
+
+    // 鼠标影响参数
+    let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    let driftTarget = { x: 0, y: 0 };
+    let driftCurrent = { x: 0, y: 0 };
+
+    // 星云参数（更明显更饱和）
+    function drawNebula() {
+      // 星云1
+      let nebula1 = ctx.createRadialGradient(
+        canvas.width * 0.25, canvas.height * 0.38, 0,
+        canvas.width * 0.25, canvas.height * 0.38, canvas.width * 0.7
+      );
+      nebula1.addColorStop(0, 'rgba(120,80,255,0.32)');
+      nebula1.addColorStop(0.4, 'rgba(60,120,255,0.18)');
+      nebula1.addColorStop(0.8, 'rgba(0,0,0,0)');
+      ctx.save();
+      ctx.globalAlpha = 0.85;
+      ctx.beginPath();
+      ctx.arc(canvas.width * 0.25, canvas.height * 0.38, canvas.width * 0.7, 0, 2 * Math.PI);
+      ctx.closePath();
+      ctx.fillStyle = nebula1;
+      ctx.fill();
+      ctx.restore();
+      // 星云2
+      let nebula2 = ctx.createRadialGradient(
+        canvas.width * 0.7, canvas.height * 0.7, 0,
+        canvas.width * 0.7, canvas.height * 0.7, canvas.width * 0.55
+      );
+      nebula2.addColorStop(0, 'rgba(255,60,255,0.22)');
+      nebula2.addColorStop(0.3, 'rgba(60,255,255,0.13)');
+      nebula2.addColorStop(0.8, 'rgba(0,0,0,0)');
+      ctx.save();
+      ctx.globalAlpha = 0.7;
+      ctx.beginPath();
+      ctx.arc(canvas.width * 0.7, canvas.height * 0.7, canvas.width * 0.55, 0, 2 * Math.PI);
+      ctx.closePath();
+      ctx.fillStyle = nebula2;
+      ctx.fill();
+      ctx.restore();
+      // 星云3（蓝紫渐变）
+      let nebula3 = ctx.createRadialGradient(
+        canvas.width * 0.5, canvas.height * 0.8, 0,
+        canvas.width * 0.5, canvas.height * 0.8, canvas.width * 0.4
+      );
+      nebula3.addColorStop(0, 'rgba(80,180,255,0.18)');
+      nebula3.addColorStop(0.5, 'rgba(120,80,255,0.12)');
+      nebula3.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.save();
+      ctx.globalAlpha = 0.5;
+      ctx.beginPath();
+      ctx.arc(canvas.width * 0.5, canvas.height * 0.8, canvas.width * 0.4, 0, 2 * Math.PI);
+      ctx.closePath();
+      ctx.fillStyle = nebula3;
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function randomStar() {
+      return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: STAR_MIN_SIZE + Math.random() * (STAR_MAX_SIZE - STAR_MIN_SIZE),
+        speed: STAR_SPEED + Math.random() * 0.15,
+        alpha: 0.5 + Math.random() * 0.5,
+        drift: (Math.random() - 0.5) * 0.18,
+        flickerSeed: Math.random() * Math.PI * 2,
+        flickerSpeed: 0.8 + Math.random() * 1.2
+      };
+    }
+
+    function createStars() {
+      stars = [];
+      for (let i = 0; i < STAR_NUM; i++) {
+        stars.push(randomStar());
+      }
+    }
+
+    function drawStars(time) {
+      for (let star of stars) {
+        ctx.save();
+        let flicker = 0.6 + 0.4 * Math.abs(Math.sin(time * 0.001 * star.flickerSpeed + star.flickerSeed));
+        ctx.globalAlpha = star.alpha * flicker;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, 2 * Math.PI);
+        ctx.fillStyle = STAR_COLOR;
+        ctx.shadowColor = '#fff';
+        ctx.shadowBlur = 10 * flicker;
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function animateStars(time) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawNebula();
+      // 鼠标影响整体漂移
+      driftTarget.x = (mouse.x - canvas.width / 2) * 0.0007;
+      driftTarget.y = (mouse.y - canvas.height / 2) * 0.0007;
+      // 缓慢插值
+      driftCurrent.x += (driftTarget.x - driftCurrent.x) * 0.03;
+      driftCurrent.y += (driftTarget.y - driftCurrent.y) * 0.03;
+      for (let star of stars) {
+        star.y += star.speed + driftCurrent.y * 30;
+        star.x += star.drift + driftCurrent.x * 30;
+        star.size += (Math.random() - 0.5) * 0.01;
+        star.size = Math.max(STAR_MIN_SIZE, Math.min(STAR_MAX_SIZE, star.size));
+        if (star.y > canvas.height + 2) {
+          star.x = Math.random() * canvas.width;
+          star.y = -2;
+        }
+        if (star.x < -2) star.x = canvas.width + 2;
+        if (star.x > canvas.width + 2) star.x = -2;
+      }
+      drawStars(time);
+      requestAnimationFrame(animateStars);
+    }
+
+    function initStars() {
+      resizeCanvas();
+      createStars();
+      drawNebula();
+      drawStars(0);
+      animateStars(0);
+    }
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      createStars();
+    });
+
+    window.addEventListener('mousemove', e => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    window.addEventListener('touchmove', e => {
+      if (e.touches && e.touches.length > 0) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', initStars);
+  </script>
 </body>
-</html> 
+</html>

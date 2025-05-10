@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+点击"远程连接" -> "Workbench远程连接<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -348,7 +348,7 @@
       <a href="#" class="nav-link">专题</a>
       <a href="#" class="nav-link">最新</a>
     </div>
-    <button class="user-btn">登录/注册</button>
+    <button class="user-btn" id="loginBtn">登录/注册</button>
   </nav>
 
   <section class="banner">
@@ -366,19 +366,31 @@
         <img class="game-thumb" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="game1">
         <div class="game-title">霓虹疾驰</div>
         <div class="game-tags"><span class="game-tag">竞速</span><span class="game-tag">赛博朋克</span></div>
-        <button class="game-btn">开始游戏</button>
+        <div style="display: flex; gap: 8px; margin-top: 8px;">
+          <a href="games/hexgl/index.html" target="_blank" class="game-btn">开始玩 HexGL</a>
+          <button class="game-btn" style="background: linear-gradient(90deg, #ff4081 10%, #ff9100 90%);">推荐</button>
+        </div>
+        <div style="margin-top: 8px; text-align: center;">
+          <a href="games/hexgl/index.html" target="_blank" style="color: #1de9b6; text-decoration: none; font-size: 0.9rem; text-shadow: 0 0 4px #1de9b6a0;">点击这里开始玩 HexGL →</a>
+        </div>
       </div>
       <div class="game-card">
         <img class="game-thumb" src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="game2">
         <div class="game-title">未来迷城</div>
         <div class="game-tags"><span class="game-tag">冒险</span><span class="game-tag">解谜</span></div>
-        <button class="game-btn">开始游戏</button>
+        <div style="display: flex; gap: 8px; margin-top: 8px;">
+          <button class="game-btn">开始游戏</button>
+          <button class="game-btn" style="background: linear-gradient(90deg, #ff4081 10%, #ff9100 90%);">推荐</button>
+        </div>
       </div>
       <div class="game-card">
         <img class="game-thumb" src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="game3">
         <div class="game-title">光影猎手</div>
         <div class="game-tags"><span class="game-tag">动作</span><span class="game-tag">射击</span></div>
-        <button class="game-btn">开始游戏</button>
+        <div style="display: flex; gap: 8px; margin-top: 8px;">
+          <button class="game-btn">开始游戏</button>
+          <button class="game-btn" style="background: linear-gradient(90deg, #ff4081 10%, #ff9100 90%);">推荐</button>
+        </div>
       </div>
     </div>
   </section>
@@ -445,7 +457,112 @@
     &copy; 2024 CYBERGAMES. 赛博朋克小游戏站 | 联系方式：hi@cybergames.com
   </footer>
 
+  <div id="loginModal" style="display:none;position:fixed;z-index:1000;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.55);align-items:center;justify-content:center;">
+    <div style="background:#181a24;padding:32px 28px 24px 28px;border-radius:18px;box-shadow:0 0 24px #1de9b6a0;min-width:320px;max-width:90vw;position:relative;">
+      <div id="loginTab" style="display:flex;justify-content:center;gap:24px;margin-bottom:18px;">
+        <span id="tabLogin" style="cursor:pointer;color:#1de9b6;font-weight:bold;">登录</span>
+        <span id="tabRegister" style="cursor:pointer;color:#888;">注册</span>
+      </div>
+      <div id="formLogin">
+        <input id="emailInput" type="email" placeholder="邮箱" style="width:100%;margin-bottom:12px;padding:10px 12px;border-radius:8px;border:none;font-size:1rem;outline:none;">
+        <input id="pwdInput" type="password" placeholder="密码" style="width:100%;margin-bottom:12px;padding:10px 12px;border-radius:8px;border:none;font-size:1rem;outline:none;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+          <label style="color:#aaa;font-size:0.95rem;"><input type="checkbox" id="rememberMe"> 记住登录</label>
+          <span id="forgetPwd" style="color:#536dfe;cursor:pointer;font-size:0.95rem;">忘记密码？</span>
+        </div>
+        <div id="loginError" style="color:#ff4081;font-size:0.95rem;margin-bottom:8px;display:none;"></div>
+        <button id="doLogin" style="width:100%;background:linear-gradient(90deg,#536dfe 10%,#1de9b6 90%);color:#fff;border:none;border-radius:8px;padding:10px 0;font-size:1.1rem;font-weight:bold;box-shadow:0 0 8px #1de9b6a0;cursor:pointer;">登录</button>
+        
+        <div style="margin-top:16px;text-align:center;color:#aaa;position:relative;">
+          <span style="position:relative;z-index:1;background:#181a24;padding:0 10px;">或使用第三方账号登录</span>
+          <div style="position:absolute;top:50%;left:0;right:0;height:1px;background:#333;z-index:0;"></div>
+        </div>
+        
+        <div style="display:flex;gap:12px;margin-top:16px;">
+          <button id="githubLogin" style="flex:1;background:#24292e;color:#fff;border:none;border-radius:8px;padding:8px 0;font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+            <svg style="width:24px;height:24px;margin-right:8px;" viewBox="0 0 24 24">
+              <path fill="#fff" d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z" />
+            </svg>
+            GitHub
+          </button>
+          <button id="googleLogin" style="flex:1;background:#fff;color:#444;border:none;border-radius:8px;padding:8px 0;font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+            <svg style="width:24px;height:24px;margin-right:8px;" viewBox="0 0 24 24">
+              <path fill="#EA4335" d="M5.26620003,9.76452941 C6.19878754,6.93863203 8.85444915,4.90909091 12,4.90909091 C13.6909091,4.90909091 15.2181818,5.50909091 16.4181818,6.49090909 L19.9090909,3 C17.7818182,1.14545455 15.0545455,0 12,0 C7.27006974,0 3.1977497,2.69829785 1.23999023,6.65002441 L5.26620003,9.76452941 Z" />
+              <path fill="#34A853" d="M16.0407269,18.0125889 C14.9509167,18.7163016 13.5660892,19.0909091 12,19.0909091 C8.86648613,19.0909091 6.21911939,17.076871 5.27698177,14.2678769 L1.23746264,17.3349879 C3.19279051,21.2936293 7.26500293,24 12,24 C14.9328362,24 17.7353462,22.9573905 19.834192,20.9995801 L16.0407269,18.0125889 Z" />
+              <path fill="#4A90E2" d="M19.834192,20.9995801 C22.0291676,18.9520994 23.4545455,15.903663 23.4545455,12 C23.4545455,11.2909091 23.3454545,10.5272727 23.1818182,9.81818182 L12,9.81818182 L12,14.4545455 L18.4363636,14.4545455 C18.1187732,16.013626 17.2662994,17.2212117 16.0407269,18.0125889 L19.834192,20.9995801 Z" />
+              <path fill="#FBBC05" d="M5.27698177,14.2678769 C5.03832634,13.556323 4.90909091,12.7937589 4.90909091,12 C4.90909091,11.2182781 5.03443647,10.4668121 5.26620003,9.76452941 L1.23999023,6.65002441 C0.43658717,8.26043162 0,10.0753848 0,12 C0,13.9195484 0.444780743,15.7301709 1.23746264,17.3349879 L5.27698177,14.2678769 Z" />
+            </svg>
+            Google
+          </button>
+        </div>
+      </div>
+      <div id="formRegister" style="display:none;">
+        <input id="regEmail" type="email" placeholder="邮箱" style="width:100%;margin-bottom:12px;padding:10px 12px;border-radius:8px;border:none;font-size:1rem;outline:none;">
+        <input id="regPwd" type="password" placeholder="密码（6位以上）" style="width:100%;margin-bottom:12px;padding:10px 12px;border-radius:8px;border:none;font-size:1rem;outline:none;">
+        <input id="regPwd2" type="password" placeholder="确认密码" style="width:100%;margin-bottom:12px;padding:10px 12px;border-radius:8px;border:none;font-size:1rem;outline:none;">
+        <div id="regError" style="color:#ff4081;font-size:0.95rem;margin-bottom:8px;display:none;"></div>
+        <button id="doRegister" style="width:100%;background:linear-gradient(90deg,#536dfe 10%,#1de9b6 90%);color:#fff;border:none;border-radius:8px;padding:10px 0;font-size:1.1rem;font-weight:bold;box-shadow:0 0 8px #1de9b6a0;cursor:pointer;">注册</button>
+      </div>
+      <div id="formForget" style="display:none;">
+        <input id="forgetEmail" type="email" placeholder="请输入注册邮箱" style="width:100%;margin-bottom:12px;padding:10px 12px;border-radius:8px;border:none;font-size:1rem;outline:none;">
+        <div id="forgetMsg" style="color:#1de9b6;font-size:0.95rem;margin-bottom:8px;display:none;"></div>
+        <button id="doForget" style="width:100%;background:linear-gradient(90deg,#536dfe 10%,#1de9b6 90%);color:#fff;border:none;border-radius:8px;padding:10px 0;font-size:1.1rem;font-weight:bold;box-shadow:0 0 8px #1de9b6a0;cursor:pointer;">发送重置链接</button>
+      </div>
+      <button id="closeModal" style="position:absolute;top:8px;right:12px;background:none;border:none;font-size:1.3rem;color:#888;cursor:pointer;">×</button>
+    </div>
+  </div>
+
   <script>
+    // API配置
+    const isProduction = window.location.hostname === 'on91.asia' || window.location.hostname.includes('.on91.asia');
+    const API_BASE_URL = isProduction ? '/api' : 'http://localhost:5000/api';
+    
+    const API = {
+      login: `${API_BASE_URL}/auth/login`,
+      register: `${API_BASE_URL}/auth/register`,
+      githubLogin: `${API_BASE_URL}/auth/github`,
+      googleLogin: `${API_BASE_URL}/auth/google`,
+      validateToken: `${API_BASE_URL}/user/validate-token`,
+      userProfile: `${API_BASE_URL}/user/profile`
+    };
+    
+    // HTTP请求工具
+    function getAuthHeader() {
+      const token = localStorage.getItem('auth_token');
+      return token ? { 'Authorization': `Bearer ${token}` } : {};
+    }
+    
+    async function apiRequest(url, options = {}) {
+      const headers = {
+        'Content-Type': 'application/json',
+        ...getAuthHeader(),
+        ...options.headers
+      };
+      
+      try {
+        const response = await fetch(url, {
+          ...options,
+          headers
+        });
+        
+        // 处理401错误（未授权）
+        if (response.status === 401) {
+          // 清除本地存储的凭证
+          localStorage.removeItem('auth_token');
+          localStorage.removeItem('cybergames_user');
+          // 更新UI为未登录状态
+          const loginBtn = document.getElementById('loginBtn');
+          if (loginBtn) loginBtn.textContent = '登录/注册';
+          throw new Error('会话已过期，请重新登录');
+        }
+        
+        return response;
+      } catch (error) {
+        console.error('API请求错误:', error);
+        throw error;
+      }
+    }
+
     // 星空背景动画
     const canvas = document.getElementById('star-bg');
     const ctx = canvas.getContext('2d');
@@ -604,6 +721,423 @@
     });
 
     window.addEventListener('DOMContentLoaded', initStars);
+
+    // 登录注册弹窗逻辑
+    const loginBtn = document.getElementById('loginBtn');
+    const loginModal = document.getElementById('loginModal');
+    const closeModal = document.getElementById('closeModal');
+    const tabLogin = document.getElementById('tabLogin');
+    const tabRegister = document.getElementById('tabRegister');
+    const formLogin = document.getElementById('formLogin');
+    const formRegister = document.getElementById('formRegister');
+    const formForget = document.getElementById('formForget');
+    const doLogin = document.getElementById('doLogin');
+    const doRegister = document.getElementById('doRegister');
+    const doForget = document.getElementById('doForget');
+    const emailInput = document.getElementById('emailInput');
+    const pwdInput = document.getElementById('pwdInput');
+    const regEmail = document.getElementById('regEmail');
+    const regPwd = document.getElementById('regPwd');
+    const regPwd2 = document.getElementById('regPwd2');
+    const rememberMe = document.getElementById('rememberMe');
+    const loginError = document.getElementById('loginError');
+    const regError = document.getElementById('regError');
+    const forgetPwd = document.getElementById('forgetPwd');
+    const forgetEmail = document.getElementById('forgetEmail');
+    const forgetMsg = document.getElementById('forgetMsg');
+    const githubLogin = document.getElementById('githubLogin');
+    const googleLogin = document.getElementById('googleLogin');
+
+    // 切换tab
+    tabLogin.onclick = () => {
+      tabLogin.style.color = '#1de9b6';
+      tabRegister.style.color = '#888';
+      formLogin.style.display = '';
+      formRegister.style.display = 'none';
+      formForget.style.display = 'none';
+      loginError.style.display = 'none';
+      regError.style.display = 'none';
+    };
+    tabRegister.onclick = () => {
+      tabLogin.style.color = '#888';
+      tabRegister.style.color = '#1de9b6';
+      formLogin.style.display = 'none';
+      formRegister.style.display = '';
+      formForget.style.display = 'none';
+      loginError.style.display = 'none';
+      regError.style.display = 'none';
+    };
+    forgetPwd.onclick = () => {
+      formLogin.style.display = 'none';
+      formRegister.style.display = 'none';
+      formForget.style.display = '';
+      forgetMsg.style.display = 'none';
+    };
+    // 关闭弹窗
+    closeModal.onclick = () => loginModal.style.display = 'none';
+    loginModal.onclick = e => { if (e.target === loginModal) loginModal.style.display = 'none'; };
+    // 打开弹窗
+    loginBtn.onclick = () => {
+      loginModal.style.display = 'flex';
+      tabLogin.onclick();
+      emailInput.value = '';
+      pwdInput.value = '';
+      regEmail.value = '';
+      regPwd.value = '';
+      regPwd2.value = '';
+      forgetEmail.value = '';
+    };
+    // 校验邮箱
+    function checkEmail(email) {
+      return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+    }
+    
+    // 登录 - 修改为实际API调用
+    doLogin.onclick = async () => {
+      const email = emailInput.value.trim();
+      const pwd = pwdInput.value;
+      loginError.style.display = 'none';
+      
+      // 表单验证
+      if (!checkEmail(email)) {
+        loginError.textContent = '请输入正确的邮箱地址';
+        loginError.style.display = '';
+        return;
+      }
+      if (!pwd || pwd.length < 6) {
+        loginError.textContent = '密码不能少于6位';
+        loginError.style.display = '';
+        return;
+      }
+      
+      // 显示加载状态
+      doLogin.disabled = true;
+      doLogin.textContent = '登录中...';
+      
+      try {
+        const response = await fetch(API.login, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password: pwd })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          // 处理错误
+          loginError.textContent = data.message || '登录失败';
+          loginError.style.display = '';
+          return;
+        }
+        
+        // 登录成功，保存token和用户信息
+        localStorage.setItem('auth_token', data.token);
+        localStorage.setItem('cybergames_user', data.user.email);
+        localStorage.setItem('user_profile', JSON.stringify(data.user));
+        
+        // 记住登录（可选）
+      if (rememberMe.checked) {
+          localStorage.setItem('remember_email', email);
+      } else {
+          localStorage.removeItem('remember_email');
+      }
+        
+        // 更新UI
+        loginBtn.textContent = `欢迎，${data.user.name || data.user.email}`;
+      loginModal.style.display = 'none';
+        
+        // 登录后跳转
+        afterLoginJump();
+      } catch (error) {
+        console.error('登录错误:', error);
+        loginError.textContent = '网络错误，请稍后再试';
+        loginError.style.display = '';
+      } finally {
+        doLogin.disabled = false;
+        doLogin.textContent = '登录';
+      }
+    };
+    
+    // 注册 - 修改为实际API调用
+    doRegister.onclick = async () => {
+      const email = regEmail.value.trim();
+      const pwd = regPwd.value;
+      const pwd2 = regPwd2.value;
+      regError.style.display = 'none';
+      
+      // 表单验证
+      if (!checkEmail(email)) {
+        regError.textContent = '请输入正确的邮箱地址';
+        regError.style.display = '';
+        return;
+      }
+      if (!pwd || pwd.length < 6) {
+        regError.textContent = '密码不能少于6位';
+        regError.style.display = '';
+        return;
+      }
+      if (pwd !== pwd2) {
+        regError.textContent = '两次输入的密码不一致';
+        regError.style.display = '';
+        return;
+      }
+      
+      // 显示加载状态
+      doRegister.disabled = true;
+      doRegister.textContent = '注册中...';
+      
+      try {
+        const response = await fetch(API.register, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ 
+            name: email.split('@')[0], // 默认用户名
+            email, 
+            password: pwd 
+          })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          // 处理错误
+          regError.textContent = data.message || '注册失败';
+          regError.style.display = '';
+          return;
+        }
+        
+        // 注册成功，保存token和用户信息
+        localStorage.setItem('auth_token', data.token);
+        localStorage.setItem('cybergames_user', data.user.email);
+        localStorage.setItem('user_profile', JSON.stringify(data.user));
+        
+        // 更新UI
+        loginBtn.textContent = `欢迎，${data.user.name || data.user.email}`;
+      loginModal.style.display = 'none';
+        
+        // 注册后跳转
+        afterLoginJump();
+      } catch (error) {
+        console.error('注册错误:', error);
+        regError.textContent = '网络错误，请稍后再试';
+        regError.style.display = '';
+      } finally {
+        doRegister.disabled = false;
+        doRegister.textContent = '注册';
+      }
+    };
+    
+    // 忘记密码
+    doForget.onclick = async () => {
+      const email = forgetEmail.value.trim();
+      forgetMsg.style.display = 'none';
+      
+      if (!checkEmail(email)) {
+        forgetMsg.textContent = '请输入正确的邮箱地址';
+        forgetMsg.style.color = '#ff4081';
+        forgetMsg.style.display = '';
+        return;
+      }
+      
+      // 模拟重置密码请求
+      forgetMsg.textContent = '重置链接已发送到邮箱（后端未完成此功能）';
+      forgetMsg.style.color = '#1de9b6';
+      forgetMsg.style.display = '';
+      
+      // 真实实现可添加：
+      /*
+      try {
+        const response = await fetch(`${API_BASE_URL}/auth/forgot-password`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          forgetMsg.textContent = data.message || '发送失败';
+          forgetMsg.style.color = '#ff4081';
+        } else {
+          forgetMsg.textContent = '重置链接已发送到邮箱';
+          forgetMsg.style.color = '#1de9b6';
+        }
+      } catch (error) {
+        console.error('忘记密码错误:', error);
+        forgetMsg.textContent = '网络错误，请稍后再试';
+        forgetMsg.style.color = '#ff4081';
+      }
+      */
+    };
+    
+    // 自动记住登录，检查令牌有效性
+    async function validateToken() {
+      const token = localStorage.getItem('auth_token');
+      if (!token) return false;
+      
+      try {
+        const response = await fetch(API.validateToken, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        
+        return response.ok;
+      } catch (error) {
+        console.error('令牌验证错误:', error);
+        return false;
+      }
+    }
+    
+    // 页面加载时检查登录状态
+    window.addEventListener('DOMContentLoaded', async () => {
+      // 尝试恢复记住的登录状态
+      const rememberedEmail = localStorage.getItem('remember_email');
+      if (rememberedEmail) {
+        emailInput.value = rememberedEmail;
+        rememberMe.checked = true;
+      }
+    
+      // 检查已登录状态
+      const userEmail = localStorage.getItem('cybergames_user');
+      const token = localStorage.getItem('auth_token');
+      
+      if (userEmail && token) {
+        // 先显示已登录状态
+        loginBtn.textContent = `欢迎，${userEmail}`;
+        
+        // 异步验证令牌
+        const isValid = await validateToken().catch(() => false);
+        if (!isValid) {
+          // 令牌无效，清除登录状态
+          localStorage.removeItem('auth_token');
+          localStorage.removeItem('cybergames_user');
+          loginBtn.textContent = '登录/注册';
+        }
+      }
+      
+      // 检查URL参数中是否有token和user (OAuth回调)
+      const params = new URLSearchParams(window.location.search);
+      const oauthToken = params.get('token');
+      const userJson = params.get('user');
+      
+      if (oauthToken && userJson) {
+        try {
+          // 解析user JSON
+          const userObj = JSON.parse(userJson);
+          
+          // 存储认证信息
+          localStorage.setItem('auth_token', oauthToken);
+          localStorage.setItem('cybergames_user', userObj.email);
+          localStorage.setItem('user_profile', userJson);
+          
+          // 更新UI
+          loginBtn.textContent = `欢迎，${userObj.name || userObj.email}`;
+          
+          // 清除URL参数
+          window.history.replaceState({}, document.title, window.location.pathname);
+          
+          // 如果有待跳转的游戏，则恢复跳转
+          checkPendingGameAfterOAuth();
+        } catch (error) {
+          console.error('解析用户数据出错:', error);
+        }
+      }
+    });
+    
+    // 退出登录
+    loginBtn.addEventListener('contextmenu', e => {
+      e.preventDefault();
+      if (loginBtn.textContent.startsWith('欢迎')) {
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('cybergames_user');
+        localStorage.removeItem('user_profile');
+        loginBtn.textContent = '登录/注册';
+      }
+    });
+
+    // 游戏入口强制登录逻辑
+    let pendingGameUrl = null;
+    function requireLoginThenGo(url) {
+      const user = localStorage.getItem('cybergames_user');
+      if (user) {
+        window.open(url, '_blank');
+      } else {
+        pendingGameUrl = url;
+        loginModal.style.display = 'flex';
+        tabLogin.onclick();
+      }
+    }
+    // 绑定所有游戏入口
+    document.querySelectorAll('.game-btn, .game-list a').forEach(btn => {
+      if (btn.tagName === 'A' && btn.href && btn.href.includes('games/')) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          requireLoginThenGo(this.getAttribute('href'));
+        });
+      } else if (btn.classList.contains('game-btn') && btn.textContent.includes('开始玩')) {
+        btn.addEventListener('click', function(e) {
+          const link = this.closest('.game-card').querySelector('a[href*="games/"]');
+          if (link) {
+            e.preventDefault();
+            requireLoginThenGo(link.getAttribute('href'));
+          }
+        });
+      }
+    });
+    // 登录后自动跳转
+    function afterLoginJump() {
+      if (pendingGameUrl) {
+        window.open(pendingGameUrl, '_blank');
+        pendingGameUrl = null;
+      }
+    }
+    // 在登录和注册成功后调用
+    const oldDoLogin = doLogin.onclick;
+    doLogin.onclick = function() {
+      oldDoLogin.call(this);
+      setTimeout(afterLoginJump, 100);
+    };
+    const oldDoRegister = doRegister.onclick;
+    doRegister.onclick = function() {
+      oldDoRegister.call(this);
+      setTimeout(afterLoginJump, 100);
+    };
+
+    // 第三方登录 - 修改为实际API调用
+    githubLogin.onclick = () => {
+      // 保存当前可能需要跳转的游戏URL
+      if (pendingGameUrl) {
+        localStorage.setItem('pendingGameUrl', pendingGameUrl);
+      }
+      
+      // 实际环境跳转到GitHub OAuth
+      window.location.href = API.githubLogin;
+    };
+
+    googleLogin.onclick = () => {
+      // 保存当前可能需要跳转的游戏URL
+      if (pendingGameUrl) {
+        localStorage.setItem('pendingGameUrl', pendingGameUrl);
+      }
+      
+      // 实际环境跳转到Google OAuth
+      window.location.href = API.googleLogin;
+    };
+    
+    // 从OAuth登录后恢复可能的游戏跳转
+    function checkPendingGameAfterOAuth() {
+      const pendingGame = localStorage.getItem('pendingGameUrl');
+      if (pendingGame) {
+        window.open(pendingGame, '_blank');
+        localStorage.removeItem('pendingGameUrl');
+      }
+    }
   </script>
 </body>
 </html>
